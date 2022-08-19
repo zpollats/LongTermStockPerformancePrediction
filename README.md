@@ -4,7 +4,7 @@
 
 For decades, many humans have attempted to predict the stock market. These attempts have varied in nature from predicting individual stock prices to predicting the direction of the overall market. While most argue that it's impossible to beat the market as an individual investor, I believe that with the right tools and technology, individuals can indeed outperform the market. While I believe this idea is possible, the data shows that individual investors' performances are dreadful on average when compared to the broader market. The bar chart below shows that the average investor had annual returns of 1.9% from 1999-2018 while the S&P500 returned 5.6%.
 
-![](images/)
+![](images/IndInvInfographic.jpeg)
 
 Currently, to be a well-versed individual investor requires significant time researching companies, listening to earnings calls, and having an understanding of macro-economic trends. Most people do not have the time to become knowledgable on multiple companies that are publicly traded, so it's easier and safer to invest in index funds that track the overall market. But what if there was a tool that could quickly let individual investors know which companies can beat the market over an extended period of time?
 
@@ -12,18 +12,15 @@ Currently, to be a well-versed individual investor requires significant time res
 
 I have sourced all the required data myself using the SEC's API. I used this API to pull the annual reports (10-K) for public companies from 2009-2012. I could not get any useful data from before 2009 because the SEC didn't require companies to file in XBRL format until then. In the future, I plan to use other methods to acquire and clean data prior to 2009. I stopped collecting data past 2012 because I need a 10 year window to determine if a stock outperformed the market over 10 years based on their financials. 
 
-In terms of metrics that I will use to score the performance of my model, recall will be the most important metric followed by precision. Recall will score how my model does at identifying stocks that do outperform the market. Investors will care more about finding the stocks that can outperform the market rather than correctly identifying those that underperform. Precision will also be a key metric because this gives a score for how accurate our model performs when predicting that a stock does outperform the market. 
+In terms of metrics that I will use to score the performance of my model, recall will be the most important metric followed by precision. Recall will score how my model does at identifying stocks that do outperform the market. Investors will care more about finding the stocks that can outperform the market rather than correctly identifying those that underperform. Precision will also be a key metric because this gives a score for how accurate our model performs when predicting that a stock does outperform the market. To simplify the metrics I use, I can also use the f1 score as this is the harmonic mean of precision and recall.
 
 ![](images/)
 
 ## Modeling
-For creating our final model to address this problem, we started with a selection of simpler classification models including Logistic Regression, K Nearest Neighbors, and Decision Tree Classifier. From there, we moved onto more complex options including Random Forest Classifier and XGBoost. Ultimately, we found that using a Stacking Classifier composed of a Random Forest Classifier and XGBoost performed the best through cross validation. The image below shows our CV scores for 5 folds for various models: 
+For creating my final model to address this problem, I started with a selection of simpler classification models including Logistic Regression, K Nearest Neighbors, and Decision Tree Classifier. From there, I moved onto more complex options including Random Forest Classifier and XGBoost. I created Random Forest models and XGBoost models both with and without SMOTE performed on the data due to a class imbalance. I found that the models performed much better when I synthetically oversampled the minority class (stocks that beat the market).  
 
 ![](images/)
 
-### Rationale
-
-Our rational for using a Stacking Classifier was to use the strengths of both a Random Forest Classifier and XGBoost in one model. We found that a default Random Forest Classifier and XGBoost both performed relatively well in a cross validation, so we combined these models into one using a Stacking Classifier. 
 
 ### Results
 
@@ -59,16 +56,19 @@ In conclusion, using our model will allow the Tanzanian Ministry of Water to opt
 
 ## For More Information
 
-See the full analysis in the [Data Cleaning Notebook](notebooks/data_cleaning.ipynb) and the [Modeling Jupyter Notebook](notebooks/modeling_notebook.ipynb) or review [this presentation](presentation.pdf).
+See the full analysis in the [Data Cleaning Notebook](working_notebook.ipynb) and the [Modeling Jupyter Notebook](modeling_notebook.ipynb) or review [this presentation](presentation.pdf).
 
-For additional Zach Pollatsek as follows:
+For additional info, you can reach out to me:
 
-- Zach:    zacharypollatsek@gmail.com, (435)655-5233
+- email:    zacharypollatsek@gmail.com
+- cell:     (435)655-5233
 
 ## Repository Contents
 - data
 - images
-- notebooks
+- working_notebooks
+- modeling_notebook.ipynb
+- working_notebook.ipynb
 - .gitignore
 - README.md
 - LICENSE.md
