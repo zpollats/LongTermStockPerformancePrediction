@@ -64,7 +64,7 @@ For additional info, you can reach out to me:
 ## Repository Contents
 - data
 - images
-- working_notebooks
+- extra_notebooks
 - modeling_notebook.ipynb
 - data_cleaning_notebook.ipynb
 - .gitignore
