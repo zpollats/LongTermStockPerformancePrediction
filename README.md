@@ -1,5 +1,7 @@
 # LongTermStockPerformancePrediction
 
+If you would like to easily replicate my code, but aren't sure what python packages you need, you can download my environment.yml file and create a new conda environment from this file. Once you've done both of these steps, check out the answer to this [stack overflow article](https://stackoverflow.com/questions/58272405/how-to-install-packages-from-yaml-file-in-conda).
+
 ## Overview and Business Problem
 
 For decades, many humans have attempted to predict the stock market. These attempts have varied in nature from predicting individual stock prices to predicting the direction of the overall market. While most argue that it's impossible to beat the market as an individual investor, I believe that with the right tools and technology, individuals can indeed outperform the market. While I believe this idea is possible, the data shows that individual investors' performances are dreadful on average when compared to the broader market. The bar chart below shows that the average investor had annual returns of 1.9% from 1999-2018 while the S&P500 returned 5.6%.
