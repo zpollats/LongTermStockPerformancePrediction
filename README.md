@@ -14,27 +14,25 @@ I have sourced all the required data myself using the SEC's API. I used this API
 
 In terms of metrics that I will use to score the performance of my model, recall will be the most important metric followed by precision. Recall will score how my model does at identifying stocks that do outperform the market. Investors will care more about finding the stocks that can outperform the market rather than correctly identifying those that underperform. Precision will also be a key metric because this gives a score for how accurate our model performs when predicting that a stock does outperform the market. To simplify the metrics I use, I can also use the f1 score as this is the harmonic mean of precision and recall.
 
-![](images/)
+As expected, the majority of companies do not beat the market, which can be seen in the distribution of stocks below.
+
+![](images/DistCompany.png)
 
 ## Modeling
-For creating my final model to address this problem, I started with a selection of simpler classification models including Logistic Regression, K Nearest Neighbors, and Decision Tree Classifier. From there, I moved onto more complex options including Random Forest Classifier and XGBoost. I created Random Forest models and XGBoost models both with and without SMOTE performed on the data due to a class imbalance. I found that the models performed much better when I synthetically oversampled the minority class (stocks that beat the market).  
+For creating my final model to address this problem, I started with a selection of simpler classification models including Logistic Regression, K Nearest Neighbors, and Decision Tree Classifier. From there, I moved onto more complex options including Random Forest Classifier and XGBoost. I created Random Forest models and XGBoost models both with and without SMOTE performed on the data due to a class imbalance. I found that the models performed much better when I synthetically oversampled the minority class (stocks that beat the market). Below I have shown the f1 scores of a select few models that I tried. As one can see, the optimized XGBoost model peformed best.
 
-![](images/)
+![](images/modelcomparison.png)
 
 
 ### Results
 
-Our final Stacking Classifier model achieved an accuracy on unseen data of 79.0%. We found that our model correctly classified functional and non-functional water pumps better than pumps that were functional needing repair. This can be seen in the grouped bar chart below:
+My final XGBoost Classifier model achieved an f1 score on unseen data of 40.0%. While this doesn't sound too impressive, the goal of my model is to find companies that can beat the market over a 10 year period. When creating this model, I did not care about how well the model predicts underperformers. If I bought all 15 companies that my model predicted to beat the market, my overall CAGR for the next 10 years would have been 12.12% which handily outperforms the long term performance of the S&P 500 (~10.5% CAGR). The below plot shows the returns of an individual investor, the S&P 500, and my model. The rates for the first two come from the image at the top of this document. 
 
-![](images/ClassPredictions.png)
+![](images/10yrinvest.png)
 
-The confusion matrix confirms that our model performs best for functional and non-functional water pumps. One point of concern with our model is that the majority of misclassifications for pumps that are functional needing repair are that the pumps are functional. This means we would be overlooking select water pumps that need repair because our model classifies them as functional. The confusion matrix can be seen below:
+The confusion matrix confirms that our model performs equally for both recall and precision. From an accuracy perspective, the model does not appear to do that well. However, stocks that do outperform the market tend to drastically outperform while those that underperform have muted losses. Thus, it is more important to find a few companies that will beat the market because they will offset the losses from the laggards. The confusion matrix can be seen below:
 
-![](images/ConfusionMatrix.png)
-
-The ROC curves for each feature class are shown below. As we expected, the AUC score for our functional needs repair class is slightly lower than those of the functional and non-functional classes. 
-
-![](images/ROC.png)
+![](images/finalconfusion.png)
 
 
 ### Limitations
@@ -52,11 +50,11 @@ With more time and resources, here are a few next steps that we would like to pu
 
 ## Conclusion
 
-In conclusion, using our model will allow the Tanzanian Ministry of Water to optimize their resource allocation by sending maintenance teams to pumps that truly need repairs or are non-functional. In following our model, the Tanzanian Ministry of Water will be able to ensure that non-functional water pumps are out of service for minimal time, which will improve access to potable water for the people of Tanzania. Our model was able to predict the correct class on unseen data approximately 80% of the time. 
+In conclusion, using my model will allow newer investors to quickly determine which companies to invest in for the long term. Focusing on the companies that do outperform the market rather than those that underperform will help investors see fruitful gains in their portfolios. 
 
 ## For More Information
 
-See the full analysis in the [Data Cleaning Notebook](working_notebook.ipynb) and the [Modeling Jupyter Notebook](modeling_notebook.ipynb) or review [this presentation](presentation.pdf).
+See the full analysis in the [Data Cleaning Notebook](data_cleaning_notebook.ipynb) and the [Modeling Jupyter Notebook](modeling_notebook.ipynb) or review [this presentation](presentation.pdf).
 
 For additional info, you can reach out to me:
 
@@ -68,8 +66,10 @@ For additional info, you can reach out to me:
 - images
 - working_notebooks
 - modeling_notebook.ipynb
-- working_notebook.ipynb
+- data_cleaning_notebook.ipynb
 - .gitignore
+- .DS_Store
 - README.md
 - LICENSE.md
 - presentation.pdf
+- environment.yml
